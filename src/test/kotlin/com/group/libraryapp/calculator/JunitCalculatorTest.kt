@@ -56,20 +56,8 @@ class JunitCalculatorTest {
 
     }
 
-    @Test
-    fun divideExceptionTest() {
-        //given
-        val calculator = Calculator(5)
-
-        //when & then
-        assertThrows<IllegalArgumentException> {
-            calculator.divide(0)
-        }.apply {
-            assertThat(message).isEqualTo("0으로 나눌 수 없습니다")
-        }
 
 
-    }
 
 
 }

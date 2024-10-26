@@ -2,7 +2,7 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
-import com.group.libraryapp.domain.user.User
+import com.group.libraryapp.domain.user.JavaUser
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.assertThrows
 
 @SpringBootTest
-class BookServiceTest @Autowired constructor(
+class JavaBookServiceTest @Autowired constructor(
         private val bookService: BookService,
         private val bookRepository: BookRepository,
         private val userRepository: UserRepository,
@@ -51,7 +51,7 @@ class BookServiceTest @Autowired constructor(
     fun loanBookTest() {
         //given
         bookRepository.save(Book("이상한 나라의 엘리스"))
-        val savedUser = userRepository.save(User("김준우", null))
+        val savedUser = userRepository.save(JavaUser("김준우", null))
         val request = BookLoanRequest("김준우", "이상한 나라의 엘리스")
 
         //when
@@ -70,7 +70,7 @@ class BookServiceTest @Autowired constructor(
     fun loanBookFailTest() {
         //given
         bookRepository.save(Book("이상한 나라의 엘리스"))
-        val savedUser = userRepository.save(User("김준우", null))
+        val savedUser = userRepository.save(JavaUser("김준우", null))
         userLoanHistoryRepository.save(UserLoanHistory(savedUser,"이상한 나라의 엘리스", false))
         val request = BookLoanRequest("김준우", "이상한 나라의 엘리스")
 
@@ -88,7 +88,7 @@ class BookServiceTest @Autowired constructor(
     fun returnBookTest() {
         //given
         bookRepository.save(Book("이상한 나라의 엘리스"))
-        val savedUser = userRepository.save(User("김준우", null))
+        val savedUser = userRepository.save(JavaUser("김준우", null))
         userLoanHistoryRepository.save(UserLoanHistory(savedUser,"이상한 나라의 엘리스", false))
         val request = BookReturnRequest("김준우", "이상한 나라의 엘리스")
 
