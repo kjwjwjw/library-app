@@ -1,6 +1,6 @@
 package com.group.libraryapp.service.user
 
-import com.group.libraryapp.domain.user.JavaUser
+import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Test
 
 @SpringBootTest
-class JavaUserServiceTest @Autowired constructor (
+class UserServiceTest @Autowired constructor (
     @Autowired private val userRepository: UserRepository,
     @Autowired private val userService: UserService,
 )
@@ -45,8 +45,8 @@ class JavaUserServiceTest @Autowired constructor (
     fun getUsersTest() {
         // given
         userRepository.saveAll(listOf(
-                JavaUser("A", 20),
-                JavaUser("B", null),
+                User("A", 20),
+                User("B", null),
         ))
 
         // when
@@ -63,8 +63,8 @@ class JavaUserServiceTest @Autowired constructor (
     @DisplayName("유저 업데이트가 정상 동작한다")
     fun updateUserNameTest() {
         // given
-        val savedUser = userRepository.save(JavaUser("A", null))
-        val request = UserUpdateRequest(savedUser.id, "B")
+        val savedUser = userRepository.save(User("A", null))
+        val request = UserUpdateRequest(savedUser.id!!, "B")
 
         // when
         userService.updateUserName(request)
@@ -79,7 +79,7 @@ class JavaUserServiceTest @Autowired constructor (
     @DisplayName("유저 삭제가 정상 동작한다")
     fun deleteUserTest() {
         // given
-        userRepository.save(JavaUser("A", null))
+        userRepository.save(User("A", null))
 
         // when
         userService.deleteUser("A")
