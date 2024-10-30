@@ -50,7 +50,7 @@ class UserServiceTest @Autowired constructor (
         ))
 
         // when
-        val results = userService.getUsers()
+        val results = userService.getUser()
 
         // then
 
